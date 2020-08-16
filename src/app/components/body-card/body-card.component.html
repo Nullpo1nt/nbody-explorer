@@ -1,0 +1,53 @@
+<mat-card class="side-card">
+  <mat-card-header class="selected-body-title">
+    <mat-card-title> Body {{ index }} </mat-card-title>
+    <button mat-flat-button class="selected-body-close" (click)="onClose(body)"><mat-icon>cancel</mat-icon></button>
+  </mat-card-header>
+  <mat-card-content>
+    <table class="selected-body-table">
+      <thead>
+        <tr>
+          <th class="selected-body-table-label">&nbsp;</th>
+          <th class="selected-body-table-x">X</th>
+          <th class="selected-body-table-y">Y</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Position</th>
+          <td>{{ body.x | number: '3.1-1' }}</td>
+          <td>{{ body.y | number: '3.1-1' }}</td>
+        </tr>
+        <tr>
+          <th>Velocity</th>
+          <td>{{ body.vX | number: '3.1-1' }}</td>
+          <td>{{ body.vY | number: '3.1-1' }}</td>
+        </tr>
+        <tr>
+          <th>Force</th>
+          <td>{{ body.fX | number: '3.1-1' }}</td>
+          <td>{{ body.fY | number: '3.1-1' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <mat-slide-toggle
+      [checked]="body.showVelocity"
+      (change)="onShowVelocityChange(body)"
+      matTooltip="Show exagerated velocity vector"
+      >Show Velocity</mat-slide-toggle
+    >
+    <mat-slide-toggle
+      [checked]="body.showForce"
+      (change)="onShowForceChange(body)"
+      matTooltip="Show exagerated force vector"
+      >Show Force</mat-slide-toggle
+    >
+    <mat-slide-toggle
+      [checked]="body.showTail"
+      (change)="onShowTailChange(body)"
+      matTooltip="Show tail of previous iteration positions"
+      >Show Tail</mat-slide-toggle
+    >
+  </mat-card-content>
+</mat-card>

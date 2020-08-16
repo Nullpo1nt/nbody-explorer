@@ -1,27 +1,47 @@
-# Nbody
+# N-Body Simulation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
+This is a sample application written with Angular (with Angular Material and RxJS) and a simple canvas rendering.  It provides a basic demonstration of a N-Body simulation using the Barnes-Hut algorithm.
 
-## Development server
+# Barnes-Hut Simulation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The Barnes-Hut Simulation is an approximation algorithm that can reduce the time complexity of a n-body simulation at
+the expense of accuracy.  It accomplishes this by breaking space into quadrants (octants in 3D) and reducing each quad into new nodes until only one body occupies a qaud. The forces are then approximated by using the center of mass (CoM) for a quad if it is sufficiently far away.
 
-## Code scaffolding
+Sufficiently far is defined by the parameter &theta; which represents the ratio of quadrant-length over distance between target bodies (either body-body or body-CoM).  A &theta; value of zero is worse than the brute-force approach incurring tree
+construction penalties too.  A &theta; value of one provides good performance with small error.  Higher values incur higher error and faster run-time.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+(https://en.wikipedia.org/wiki/Barnes%E2%80%93Hut_simulation)
 
-## Build
+## How to run
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+1. Execute `npm start`
+2. Open `localhost:4200` in a browser
 
-## Running unit tests
+Within the application you can:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Adjust the number of bodies.
+2. Change the value of &theta;.  High values are less accurate, but more preferment.  Low values are more accurate.  A
+   value of 1 others a decent compromise.
+3. Change the value &Delta;t.
+4. Click on any body to see it's details
+    - Position, velocity, force, and rendering options
 
-## Running end-to-end tests
+## TODO
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Implement E2E
+- Implement component/unit tests
+- Implement body generators and drop down selector
+  - Random generator
+  - User defined bodies
+  - Pre-configured scenes, e.g. stable orbits, etc
+- Separate canvas rendering logic from simulation logic (visitor pattern similar approach)
+  - Body
+  - BarnesHutNode
+  - Boundary
+- Move simulation calculation loop to WebHelper
+  - Test the overhead of messaging between threads
+- Switch to drawing library (abstract out canvas/WebGL support), e.g. two.js or similar
+- Implement better integration method
+  - Leap-frog
+  - Runge-Kutta
+- Implement D3 charts for error growth vs. &theta; value.

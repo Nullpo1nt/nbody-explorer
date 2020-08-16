@@ -1,0 +1,31 @@
+mat-card {
+  margin: 5px;
+}
+
+mat-slide-toggle {
+  margin: 8px 0;
+  display: block;
+}
+
+.selected-body-title {
+  display: flex;
+}
+
+.selected-body-close {
+  position: absolute;
+  right: 0px;
+  top: 5px;
+}
+
+.selected-body-table {
+  width: 100%;
+}
+
+.selected-body-table td {
+  padding-left: 15px;
+}
+
+.selected-body-table-x,
+.selected-body-table-y {
+  width: 50%;
+}

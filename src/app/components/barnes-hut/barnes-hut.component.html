@@ -1,0 +1,71 @@
+<mat-sidenav-container>
+  <mat-sidenav position="start" opened="true" mode="side">
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Welcome
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <p>
+          This is a basic demonstration of a Barnes-Hut Simulation, an approximation solution for N-Bodies.
+        </p>
+        <p>
+          To begin, try <a href="#" (click)="onAddBodies()">adding some bodies</a> to the simulation. Note the value of
+          &Theta; is one and <a href="#" (click)="onClickPlay()">click the play button</a>. This setting provides good
+          performance with some error in the calculation.
+        </p>
+        <p>
+          Next click the <a href="#" (click)="onClickReset()">reset button</a> to return the bodies to their initial
+          state. <a href="#" (click)="onClickSetThetaZero()">Set &Theta; to zero</a> and
+          <a href="#" (click)="onClickPlay()">click the play button</a>. This causes the algorithm to behave like the
+          naive approach (brute force) causing time complexity of O(n<sup>2</sup>). Perhaps you should stop it now...
+        </p>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Simulation Options
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-barnes-hut-controls
+          maxBodies="5000"
+          maxTheta="3"
+          maxDeltaT="2"
+          (resetEvent)="onResetEvent()"
+          (bodiesEvent)="onBodiesEvent($event)"
+        >
+        </app-barnes-hut-controls>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Render Options
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-barnes-hut-render-controls [root]="root"></app-barnes-hut-render-controls>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-sidenav>
+
+  <mat-sidenav-content position="end" opened="true" mode="side">
+    <app-nbody-canvas [nbody]="root" (selectEvent)="onSelectBody($event)"></app-nbody-canvas>
+  </mat-sidenav-content>
+
+  <mat-sidenav position="end" opened="true" mode="side">
+    <div class="no-selection" *ngIf="selected.length == 0">
+      <span>Click a body to see details.</span>
+    </div>
+    <app-body-card
+      *ngFor="let body of selected; let i = index"
+      [body]="body"
+      [index]="i"
+      (closeEvent)="onSelectedCloseEvent($event)"
+    >
+    </app-body-card>
+  </mat-sidenav>
+</mat-sidenav-container>

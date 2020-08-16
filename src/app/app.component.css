@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
+}
+
+.container-toolbar {
+  flex: 0 1 auto;
+}
+
+.container-router-outlet {
+  flex: 1 1 auto;
+}

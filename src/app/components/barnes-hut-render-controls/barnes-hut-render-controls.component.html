@@ -1,0 +1,29 @@
+<div class="render-controls">
+  <mat-slide-toggle (change)="onShowBodiesChange()" [checked]="root.showBodies">
+    Show Bodies
+  </mat-slide-toggle>
+
+  <mat-slide-toggle
+    (change)="onShowBoundsChange()"
+    [checked]="root.showBoundary"
+    matTooltip="Show each node's bounding box"
+  >
+    Show Region
+  </mat-slide-toggle>
+
+  <mat-slide-toggle
+    (change)="onShowTreeChange()"
+    [checked]="root.showTree"
+    matTooltip="Draw tree edges from root center of mass to each leaf body"
+  >
+    Show Tree
+  </mat-slide-toggle>
+
+  <mat-slide-toggle
+    (change)="onShowCoMChange()"
+    [checked]="root.showCom"
+    matTooltip="Show center of mass for each node"
+  >
+    Show Center of Mass
+  </mat-slide-toggle>
+</div>

@@ -1,0 +1,57 @@
+<div class="action-buttons">
+  <button mat-flat-button color="primary" (click)="onStartClick()" [disabled]="isPlaying" matTooltip="Start simulation">
+    <mat-icon>play_arrow</mat-icon> Start
+  </button>
+  <button mat-flat-button color="primary" (click)="onStopClick()" [disabled]="!isPlaying" matTooltip="Stop simulation">
+    <mat-icon>stop</mat-icon> Stop
+  </button>
+  <button mat-flat-button color="primary" (click)="onResetClick()" matTooltip="Reset bodies to initial state">
+    Reset
+  </button>
+</div>
+
+<div class="slider-controls">
+  <span>Bodies: {{ bodies.value }}</span>
+  <div>
+    <mat-slider
+      [formControl]="bodies"
+      thumbLabel="true"
+      min="0"
+      max="{{ maxBodies }}"
+      (change)="onBodiesChange()"
+      matTooltip="Number of bodies within the simulation"
+    ></mat-slider>
+    <button mat-icon-button (click)="onRemoveBodiesClick()" [disabled]="bodiesDisabled" matTooltip="Remove one body">
+      <mat-icon>remove_circle_outline</mat-icon>
+    </button>
+    <button mat-icon-button (click)="onAddBodiesClick()" [disabled]="bodiesDisabled" matTooltip="Add one body">
+      <mat-icon>add_circle_outline</mat-icon>
+    </button>
+  </div>
+
+  <label>&theta;: {{ theta.value }}</label>
+  <div>
+    <mat-slider
+      thumbLabel="true"
+      min="0"
+      max="{{ maxTheta }}"
+      step="0.1"
+      [formControl]="theta"
+      (change)="onThetaChange()"
+      matTooltip="Theta parameter of Barnes Hut algorithm, larger value are less accurate."
+    ></mat-slider>
+  </div>
+
+  <label>&Delta;t: {{ deltaT.value }}</label>
+  <div>
+    <mat-slider
+      thumbLabel="true"
+      min="0.1"
+      max="{{ maxDeltaT }}"
+      step="0.1"
+      [formControl]="deltaT"
+      (change)="onDeltaTChange()"
+      matTooltip="Time interval of each simulated step"
+    ></mat-slider>
+  </div>
+</div>
